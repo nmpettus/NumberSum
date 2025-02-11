@@ -1,0 +1,93 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(9, 50px); /* Updated for 7x7 + 2 */
+  grid-template-rows: repeat(9, 50px);    /* Updated for 7x7 + 2 */
+  gap: 5px;
+  background-color: #fff;
+  border: 2px solid #333;
+  padding: 10px;
+}
+
+.grid-cell {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  font-size: 18px;
+    /*cursor: pointer;  Removed, using style prop instead */
+}
+
+.target-cell {
+  background-color: #e0e0e0;
+  font-weight: bold;
+}
+
+.unused-cell {
+    background-color: #f9f9f9; /* Light grey for unused cells */
+    border: 1px dashed #ddd;
+}
+
+input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: none;
+  font-size: 16px;
+    background-color: transparent; /* Make input background transparent */
+}
+input:focus {
+    outline: none;
+    border: 2px solid blue;
+}
+
+/* Hide the number input spinners */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+
+.solved-cell {
+  background-color: #d4edda; /* Light green for solved cells */
+}
+
+/*.selected-cell {
+  background-color: #add8e6;  Removed: Using inline styles now
+}*/
+
+.solved-message {
+  position: absolute;
+  top: 20px;
+  font-size: 24px;
+  color: green;
+}
+
+.reset-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.reset-button:hover {
+    background-color: #3e8e41;
+}
