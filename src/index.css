@@ -10,12 +10,13 @@ body {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(9, 50px); /* Updated for 7x7 + 2 */
-  grid-template-rows: repeat(9, 50px);    /* Updated for 7x7 + 2 */
+  grid-template-columns: repeat(var(--grid-size), 50px);
+  grid-template-rows: repeat(var(--grid-size), 50px);
   gap: 5px;
   background-color: #fff;
   border: 2px solid #333;
   padding: 10px;
+  position: relative; /* For overlay positioning */
 }
 
 .grid-cell {
@@ -26,7 +27,6 @@ body {
   align-items: center;
   border: 1px solid #ccc;
   font-size: 18px;
-    /*cursor: pointer;  Removed, using style prop instead */
 }
 
 .target-cell {
@@ -35,7 +35,7 @@ body {
 }
 
 .unused-cell {
-    background-color: #f9f9f9; /* Light grey for unused cells */
+    background-color: #f9f9f9;
     border: 1px dashed #ddd;
 }
 
@@ -45,14 +45,13 @@ input {
   text-align: center;
   border: none;
   font-size: 16px;
-    background-color: transparent; /* Make input background transparent */
+    background-color: transparent;
 }
 input:focus {
     outline: none;
     border: 2px solid blue;
 }
 
-/* Hide the number input spinners */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -64,18 +63,43 @@ input[type=number] {
 
 
 .solved-cell {
-  background-color: #d4edda; /* Light green for solved cells */
+  background-color: #d4edda;
 }
 
-/*.selected-cell {
-  background-color: #add8e6;  Removed: Using inline styles now
-}*/
+.flash-cell {
+    animation: flash 0.3s ease-out;
+}
+
+@keyframes flash {
+    0% { background-color: #d4edda; } /* Solved cell color */
+    50% { background-color: #90ee90; } /* Lighter green */
+    100% { background-color: #d4edda; }
+}
+
+.solved-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    z-index: 10; /* Ensure it's on top */
+}
 
 .solved-message {
-  position: absolute;
-  top: 20px;
-  font-size: 24px;
+  font-size: 48px;
   color: green;
+  font-weight: bold;
+    animation: celebrate 1s ease-in-out;
+}
+
+@keyframes celebrate {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 .reset-button {
